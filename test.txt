@@ -1,0 +1,4 @@
+asdf
+some another
+cat: illegal option -- k
+usage: cat [-benstuv] [file ...]

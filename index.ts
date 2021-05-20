@@ -1,4 +1,8 @@
- const cdecorator = (target: new (...args: any) => any) => {
+/*  import { Component } from './decorator';
+  import { getRenderer } from './renderers';
+  import { PROPERTIES_SYMBOL } from './types';
+
+  const cdecorator = (target: new (...args: any) => any) => {
      console.log('class decorator')
      
       return class Test_1 extends target {
@@ -70,6 +74,7 @@ function assert(predicate: Function, message: string): PropertyDecorator{
   
   // @cdecorator
   class Person {
+    
     constructor(public test: number, public test3: string){            
     }
 
@@ -79,12 +84,45 @@ function assert(predicate: Function, message: string): PropertyDecorator{
     @mDecorator
     launch(n: number) {
       return n * 2;
-  }
-
-    
-
+  }    
   }
   
-  const p = new Person(23, 'asdf');
-  p.age = -234;
-  let test = p.age;
+  @Component({
+    properties: ['name', 'age', 'mmm']
+  })
+  class MyComponent {
+    name: string = 'bob';
+    age: number = 34;
+  }
+
+  let c = new MyComponent();
+  console.log(c[PROPERTIES_SYMBOL]);
+
+for(let i = 0; i < c[PROPERTIES_SYMBOL].length; i++){
+  Object.defineProperty(c, c[PROPERTIES_SYMBOL][i], {
+    configurable: false,
+    set(v){
+      this[PROPERTIES_SYMBOL][i] = v;
+      getRenderer().render(c[PROPERTIES_SYMBOL][i], v);
+    },
+    get() {
+      return this[PROPERTIES_SYMBOL][i]
+    }
+
+  })
+}
+
+console.dir(c);
+c.name = 'boris';
+c.age = 252;
+*/
+  
+class A{}
+
+  function test<T>(t: T):T{    
+    return t;
+  }
+
+  let a = new A();
+  test(a);
+

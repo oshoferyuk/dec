@@ -5,3 +5,9 @@ export function renderComponent(C: any){
         
     }
 }
+
+function <T, U> test: boolean {
+    return true;
+}
+
+<T, U> arrowF

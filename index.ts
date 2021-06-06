@@ -111,18 +111,86 @@ for(let i = 0; i < c[PROPERTIES_SYMBOL].length; i++){
 
   })
 }
-
-console.dir(c);
-c.name = 'boris';
-c.age = 252;
 */
-  
-class A{}
 
-  function test<T>(t: T):T{    
-    return t;
+
+enum Color{
+  blue,
+  green,
+  red
+}
+
+enum Size{
+  small,
+  medium,
+  large
+}
+
+
+interface Specification {
+  isSatisfied(product: Product){}
+}
+
+class SizeSpecification implements Specification{
+  
+  constructor(private size: Size) {        
   }
 
-  let a = new A();
-  test(a);
+  isSatisfied(product: Product){
+    return product.size === size;
+  }
+}
+
+class ColorSpecification implements Specification{
+  constructor(private color: Color){
+  }
+
+  isSatisfied(product: Product){
+    return product.color === color;
+  }
+}
+
+
+class Product{
+  
+  constructor(private name: string, private size: Size, private color: Color) {        
+  }
+}
+
+class ProductFilter{
+  filterByColor(products, color){
+    return products.filter(p => p.color === color)
+  }
+
+  filterBySize(products, size){
+    return products.filter(p => p.size === size)
+  }
+}
+
+
+class BetterFilter{
+  filter(items, spec){
+    returns items.filter( x => spec.isSatisfied(x));
+  }
+
+}
+
+const apple = new Product('apple', Size.small, Color.green);
+const tree = new Product('tree', Size.large, Color.green);
+const house = new Product('house', Size.large, Color.blue);
+
+const pf = new ProductFilter();
+const products = [apple, tree, house];
+const filterResult = pf.filterByColor(products, Color.green);
+console.log(`Green products (old)`);
+for(let p of filterResult){
+  console.log(` * ${p.name}`);
+}
+
+ 
+
+console.log(`Green products (new)`);
+
+
+
 
